@@ -1,0 +1,22 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+*{-webkit-tap-highlight-color: transparent;}
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus, 
+input:-webkit-autofill:active{
+    -webkit-box-shadow: 0 0 0 30px white inset !important;
+}
+::-webkit-scrollbar {
+  display: none;
+}
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0 1000px #F8F8F9 inset !important; /* match your bg */
+  -webkit-text-fill-color: #000 !important; /* text color */
+  caret-color: #000 !important;
+  border-radius: 8px; /* keep your rounded look */
+}
