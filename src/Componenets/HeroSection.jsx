@@ -25,6 +25,33 @@ const slides = [
     image:
      img1,
   },
+    {
+    id: 2,
+    label: "Exclusive",
+    title: "SKIN CARE COLLECTION",
+    description: "Shop Collection",
+    button: "SHOP NOW",
+    image:
+     img1,
+  },
+    {
+    id: 2,
+    label: "Exclusive",
+    title: "SKIN CARE COLLECTION",
+    description: "Shop Collection",
+    button: "SHOP NOW",
+    image:
+     img1,
+  },
+    {
+    id: 2,
+    label: "Exclusive",
+    title: "SKIN CARE COLLECTION",
+    description: "Shop Collection",
+    button: "SHOP NOW",
+    image:
+     img1,
+  },
 ];
 
 export default function HeroSection() {
@@ -82,31 +109,44 @@ export default function HeroSection() {
 
 
         {/* Dots */}
-        <div className="absolute bottom-6 left-1/2 transform -translate-x-1/2 flex gap-2 z-20">
-          {slides.map((_, idx) => (
-            <div
-              key={idx}
-              onClick={() => setCurrent(idx)}
-              className={`w-3 h-3 rounded-full cursor-pointer ${
-                current === idx ? "bg-white" : "bg-gray-400"
-              }`}
-            />
-          ))}
-        </div>
+      {/* Controls Bottom-Right */}
+<div className="absolute bottom-6 right-6 flex items-center gap-4 z-20">
 
-        {/* Arrows */}
-        <button
-          onClick={prevSlide}
-          className="absolute top-1/2 left-4 transform -translate-y-1/2 text-white text-2xl z-20"
-        >
-          <FaChevronLeft />
-        </button>
-        <button
-          onClick={nextSlide}
-          className="absolute top-1/2 right-4 transform -translate-y-1/2 text-white text-2xl z-20"
-        >
-          <FaChevronRight />
-        </button>
+  {/* Prev Button */}
+  <button
+    onClick={prevSlide}
+    className="text-white text-sm hover:opacity-70 transition"
+  >
+    <FaChevronLeft />
+  </button>
+
+  {/* Dots */}
+  <div className="flex items-center gap-2">
+    {slides.map((_, idx) => (
+      <div
+        key={idx}
+        onClick={() => setCurrent(idx)}
+        className={`cursor-pointer transition-all duration-300 flex items-center justify-center
+          ${current === idx 
+            ? "w-4 h-1 bg-white rounded-full"  // ACTIVE → DASH
+            : "w-1 h-1 bg-gray-400 rounded-full"} // INACTIVE → DOT
+        `}
+      />
+    ))}
+  </div>
+
+  {/* Next Button */}
+  <button
+    onClick={nextSlide}
+    className="text-white text-sm hover:opacity-70 transition"
+  >
+    <FaChevronRight />
+  </button>
+
+</div>
+
+
+      
       </div>
 
       {/* RIGHT SECTION (flex row) */}

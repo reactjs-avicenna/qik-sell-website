@@ -3,6 +3,7 @@ import './App.css'
 import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
 import { Toaster } from 'react-hot-toast';
 import Home from './Pages/Home';
+import Category from './Pages/Category';
 
 export default function App() {
   // const RequireAuth = ({ children }) => {
@@ -22,6 +23,7 @@ export default function App() {
     <Router>
     <Routes>
     <Route path="/" element={<Home/>}/>
+    <Route path="/category" element={<Category/>}/>
     </Routes>
     </Router>
     <Toaster
