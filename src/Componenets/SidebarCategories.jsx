@@ -1,9 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
+import { Select, MenuItem, InputBase } from "@mui/material";
 
 export default function SidebarCategories() {
+  const [location, setLocation] = useState("Lahore, Pakistan");
+
   return (
-    <div className="w-full ">
+    <div className="w-full">
 
       {/* Categories Title */}
       <h2 className="text-[17px] font-semibold mb-3">Categories</h2>
@@ -13,38 +16,37 @@ export default function SidebarCategories() {
         <p className="font-semibold text-sm mb-2">Electronics</p>
 
         <ul className="space-y-1 text-[13px] text-gray-700">
-          <li className="flex justify-between">
-            <span>Laptops</span>
-            <span className="text-gray-500">(10)</span>
-          </li>
-
-          <li className="flex justify-between">
-            <span>Tablets</span>
-            <span className="text-gray-500">(22)</span>
-          </li>
-
-          <li className="flex justify-between">
-            <span>Mobiles</span>
-            <span className="text-gray-500">(34)</span>
-          </li>
-
-          <li className="flex justify-between">
-            <span>Monitors</span>
-            <span className="text-gray-500">(40)</span>
-          </li>
+          {["Laptops", "Tablets", "Mobiles", "Monitors"].map((item, idx) => (
+            <li
+              key={item}
+              className="flex justify-between cursor-pointer hover:text-customPurple"
+            >
+              <span>{item}</span>
+              <span className="text-gray-500">({[10, 22, 34, 40][idx]})</span>
+            </li>
+          ))}
         </ul>
       </div>
 
       <hr className="my-4" />
 
       {/* Location Dropdown */}
-      <div className="">
+      <div>
         <p className="font-semibold text-sm mb-2">Location</p>
 
-        <div className="border rounded-md flex justify-between items-center px-2 py-1 cursor-pointer">
-          <span className="text-[13px]">Lahore, Pakistan</span>
-          <KeyboardArrowDownIcon fontSize="small" />
-        </div>
+        <Select
+          value={location}
+          onChange={(e) => setLocation(e.target.value)}
+          displayEmpty
+          input={<InputBase />}
+          IconComponent={KeyboardArrowDownIcon}
+          className="w-full border rounded-md px-2 py-1 text-[13px] cursor-pointer"
+        >
+          <MenuItem value="Lahore, Pakistan">Lahore, Pakistan</MenuItem>
+          <MenuItem value="Karachi, Pakistan">Karachi, Pakistan</MenuItem>
+          <MenuItem value="Islamabad, Pakistan">Islamabad, Pakistan</MenuItem>
+          <MenuItem value="Multan, Pakistan">Multan, Pakistan</MenuItem>
+        </Select>
       </div>
 
       <hr className="my-4" />
@@ -54,25 +56,15 @@ export default function SidebarCategories() {
         <p className="font-semibold text-sm mb-2">Pakistan</p>
 
         <ul className="space-y-1 text-[13px] text-gray-700">
-          <li className="flex justify-between">
-            <span>Islamabad</span>
-            <span className="text-gray-500">(20)</span>
-          </li>
-
-          <li className="flex justify-between">
-            <span>Karachi</span>
-            <span className="text-gray-500">(33)</span>
-          </li>
-
-          <li className="flex justify-between">
-            <span>Multan</span>
-            <span className="text-gray-500">(24)</span>
-          </li>
-
-          <li className="flex justify-between">
-            <span>Lahore</span>
-            <span className="text-gray-500">(30)</span>
-          </li>
+          {["Islamabad", "Karachi", "Multan", "Lahore"].map((city, idx) => (
+            <li
+              key={city}
+              className="flex justify-between cursor-pointer hover:text-customPurple"
+            >
+              <span>{city}</span>
+              <span className="text-gray-500">({[20, 33, 24, 30][idx]})</span>
+            </li>
+          ))}
         </ul>
       </div>
 
@@ -88,11 +80,11 @@ export default function SidebarCategories() {
             placeholder="Min"
             className="w-1/2 border placeholder:text-black border-[#0000004D] rounded px-2 py-1 text-[12px]"
           />
-         <p className="text-[10px]">To</p>
+          <p className="text-[10px]">To</p>
           <input
             type="number"
             placeholder="Max"
-            className="w-1/2 border placeholder:text-black  border-[#0000004D] rounded px-2 py-1 text-[12px]"
+            className="w-1/2 border placeholder:text-black border-[#0000004D] rounded px-2 py-1 text-[12px]"
           />
         </div>
       </div>

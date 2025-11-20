@@ -4,6 +4,8 @@ import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-d
 import { Toaster } from 'react-hot-toast';
 import Home from './Pages/Home';
 import Category from './Pages/Category';
+import ProductView from './Pages/ProductView';
+import Chat from './Pages/Chat';
 
 export default function App() {
   // const RequireAuth = ({ children }) => {
@@ -24,6 +26,8 @@ export default function App() {
     <Routes>
     <Route path="/" element={<Home/>}/>
     <Route path="/category" element={<Category/>}/>
+    <Route path="/productView" element={<ProductView/>}/>
+    <Route path="/chat" element={<Chat/>}/>
     </Routes>
     </Router>
     <Toaster

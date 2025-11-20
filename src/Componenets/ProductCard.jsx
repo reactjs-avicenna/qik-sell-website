@@ -1,10 +1,16 @@
 import React from "react";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import { FaLocationDot } from "react-icons/fa6";
+import { useNavigate } from "react-router-dom";
 
 const ProductCard = ({ product, view }) => {
+  let navigate = useNavigate();
   return (
     <div
+      onClick={() => {
+        navigate("/productView"),
+          window.scrollTo(0, 0);
+      }}
       className={`border rounded-lg p-3 bg-white hover:shadow-md transition 
       ${view === "list" ? "flex gap-4 items-center" : ""}`}
     >

@@ -4,12 +4,17 @@ import SearchBar from "./SearchBar";
 import logo from "../../Images/QikSell 1.png"
 import car from "../../Images/car.png"
 import property from "../../Images/property.png"
+import { useNavigate } from "react-router-dom";
 const Header = () => {
+   let navigate = useNavigate();
   return (
     <header className="w-full  bg-[#EFF3FF] flex justify-center items-center flex-col border-gray-200">
       <div className="flex h-[100px]  w-[85%] items-center justify-between ">
         <div className="flex items-center gap-3 font-semibold text-[12px]">
-          <img src={logo} alt="Logo" className="h-14 cursor-pointer" />
+          <img onClick={() => {
+          navigate("/"),
+          window.scrollTo(0, 0);
+        }} src={logo} alt="Logo" className="h-14 cursor-pointer" />
           <div className="flex items-center gap-3 cursor-pointer">
             <img src={car} alt="Logo" className="h-8" />
             <p>Motors</p>
