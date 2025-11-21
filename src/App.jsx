@@ -6,6 +6,10 @@ import Home from './Pages/Home';
 import Category from './Pages/Category';
 import ProductView from './Pages/ProductView';
 import Chat from './Pages/Chat';
+import UserProfile from './Pages/UserProfile';
+import Favorites from './Pages/Favorites';
+import MyAds from './Pages/MyAds';
+import PostAds from './Pages/PostAds';
 
 export default function App() {
   // const RequireAuth = ({ children }) => {
@@ -28,6 +32,11 @@ export default function App() {
     <Route path="/category" element={<Category/>}/>
     <Route path="/productView" element={<ProductView/>}/>
     <Route path="/chat" element={<Chat/>}/>
+    <Route path="/userProfile" element={<UserProfile/>}/>
+    <Route path="/favorites" element={<Favorites/>}/>
+    <Route path="/myAds" element={<MyAds/>}/>
+    <Route path="/postAds" element={<PostAds/>}/>
+
     </Routes>
     </Router>
     <Toaster

@@ -71,12 +71,19 @@ export default function ProductDetail({ product }) {
                     <div className="flex items-center justify-between border p-2 rounded-md">
                         <div className="flex">
                             <img
+                            onClick={() => {
+                                navigate("/userProfile"),
+                                    window.scrollTo(0, 0);
+                            }}
                                 src={product.sellerAvatar}
                                 alt={product.sellerName}
-                                className="w-10 h-10 rounded-full mr-3 object-cover"
+                                className="w-10 h-10 cursor-pointer rounded-full mr-3 object-cover"
                             />
                             <div>
-                                <p className="text-sm font-semibold">{product.sellerName}</p>
+                                <p onClick={() => {
+                                navigate("/userProfile"),
+                                    window.scrollTo(0, 0);
+                            }} className="text-sm cursor-pointer font-semibold">{product.sellerName}</p>
                                 <p className="text-xs text-gray-500">
                                     Member Since: {product.memberSince} | Total Ads: {product.totalAds}
                                 </p>

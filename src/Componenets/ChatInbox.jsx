@@ -10,6 +10,7 @@ import {
     RiSendPlaneFill,
     RiCloseCircleFill
 } from "react-icons/ri";
+import { useNavigate } from "react-router-dom";
 
 export default function ChatInbox({
     tabs,
@@ -20,7 +21,7 @@ export default function ChatInbox({
     onOpenAd,
 }) {
     const [activeTab, setActiveTab] = useState(tabs?.[0] || "All");
-
+    let navigate = useNavigate();
     const handleTabClick = (tab) => {
         setActiveTab(tab);
         onTabChange && onTabChange(tab);
@@ -89,15 +90,22 @@ export default function ChatInbox({
             <div className="w-2/3 bg-white rounded-lg border shadow-sm flex flex-col">
 
                 {/* Chat Header */}
-                <div className="flex items-center justify-between h-[60px] pl-4 pr-4  bg-blue-50 border-b">
+                <div className="flex  items-center justify-between h-[60px] pl-4 pr-4  bg-blue-50 border-b">
                     <div className="flex items-center gap-3">
                         <img
+                            onClick={() => {
+                                navigate("/userProfile"),
+                                    window.scrollTo(0, 0);
+                            }}
                             src={selectedUser.avatar}
-                            className="w-10 h-10 rounded-full object-cover"
+                            className="w-10 cursor-pointer h-10 rounded-full object-cover"
                             alt="avatar"
                         />
                         <div>
-                            <p className="font-semibold text-gray-800">{selectedUser.name}</p>
+                            <p onClick={() => {
+                                navigate("/userProfile"),
+                                    window.scrollTo(0, 0);
+                            }} className="font-semibold cursor-pointer text-gray-800">{selectedUser.name}</p>
                             <p className="text-xs text-gray-500">Active Now</p>
                         </div>
                     </div>
@@ -105,7 +113,7 @@ export default function ChatInbox({
                     <div className="flex items-center gap-3 text-blue-600 text-lg">
                         <RiInformationFill className="cursor-pointer hover:text-blue-800" title="Info" />
                         <RiPhoneFill className="cursor-pointer hover:text-blue-800" title="Call" />
-                        <RiCloseCircleFill  className="cursor-pointer hover:text-blue-800" title="Close Chat" />
+                        <RiCloseCircleFill className="cursor-pointer hover:text-blue-800" title="Close Chat" />
                         <RiMessage2Fill className="cursor-pointer hover:text-blue-800" title="New Message" />
                     </div>
 
