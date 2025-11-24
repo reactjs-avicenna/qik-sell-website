@@ -12,6 +12,11 @@ import { AiFillBell, AiFillMessage, AiFillHeart, AiFillSetting } from "react-ico
 import { FiLogOut, FiChevronDown } from "react-icons/fi";
 import { BsMegaphoneFill } from "react-icons/bs";
 import { MdHelp } from "react-icons/md";
+import QikSellLoginModal from "../../Modal/Auth/QikSellLoginModal";
+import SiginModel from "../../Modal/Auth/SiginModel";
+import LoginFormModal from "../../Modal/Auth/LoginFormModal";
+import SignUpFormModal from "../../Modal/Auth/SignUpFormModal";
+import ForgotPasswordModal from "../../Modal/Auth/ForgotPasswordModal";
 
 const userData = {
   name: "Robert James",
@@ -54,7 +59,23 @@ const Header = ({ searchView = true }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [openMenu, setOpenMenu] = useState(false);
   const [openNoti, setOpenNoti] = useState(false);
+  const [loginOpen, setLoginOpen] = useState(false);
+  const [signupOpen, setSignupOpen] = useState(false);
+ const [formOpen, setFormOpen] = useState(false);
+ const [formOpen1, setFormOpen1] = useState(false);
+ const [forgotformOpen, setForgotformOpen] = useState(false);
+  const [formType, setFormType] = useState("email");
 
+  function openForm(type) {
+    setLoginOpen(false)
+    setFormType(type);
+    setFormOpen(true); // open child modal
+  }
+   function openForm1(type) {
+    setSignupOpen(false)
+    setFormType(type);
+    setFormOpen1(true); // open child modal
+  }
   const menuRef = useRef();
 
   useEffect(() => {
@@ -206,7 +227,7 @@ const Header = ({ searchView = true }) => {
               {/* LOGIN BUTTON */}
               <button
                 className="bg-customBlue text-white h-[42px] w-[100px] text-[14px] font-semibold flex items-center justify-center rounded-full hover:bg-blue-700 transition"
-                onClick={() => navigate("/login")}
+                onClick={() => setLoginOpen(true)}
               >
                 Log In
               </button>
@@ -261,10 +282,10 @@ const Header = ({ searchView = true }) => {
                 <div className="flex flex-col">
                   <p
                     className={`font-semibold ${item.status === "live"
-                        ? "text-green-600"
-                        : item.status === "review"
-                          ? "text-blue-600"
-                          : "text-red-600"
+                      ? "text-green-600"
+                      : item.status === "review"
+                        ? "text-blue-600"
+                        : "text-red-600"
                       }`}
                   >
                     {item.text}
@@ -278,7 +299,57 @@ const Header = ({ searchView = true }) => {
         </div>
       )}
 
+     <QikSellLoginModal
+        open={loginOpen}
+        onClose={() => setLoginOpen(false)}
+        onSignup={() => {
+          setLoginOpen(false);
+          setSignupOpen(true);
+        }}
+        openForm={openForm}
+      />
 
+      {/* Signup Modal */}
+      <SiginModel
+        open={signupOpen}
+        onClose={() => setSignupOpen(false)}
+        onLogin={() => {
+          setSignupOpen(false);
+          setLoginOpen(true);
+        }}
+        openForm={openForm1}
+      />
+           <LoginFormModal
+        open={formOpen}
+        type={formType}
+        onClose={() => setFormOpen(false)}
+           onSignup={() => {
+          setFormOpen(false);
+          setSignupOpen(true);
+        }}
+    onForgot={() => {
+          setFormOpen(false);
+          setSignupOpen(false);
+          setForgotformOpen(true)
+        }}
+      />
+         <SignUpFormModal
+        open={formOpen1}
+        type={formType}
+        onClose={() => setFormOpen1(false)}
+          onSignup={() => {
+          setFormOpen1(false);
+          setLoginOpen(true);
+        }}
+      />
+      <ForgotPasswordModal
+        open={forgotformOpen}
+        onClose={() => setForgotformOpen(false)} 
+         onSignup={() => {
+          setForgotformOpen(false);
+          setLoginOpen(true);
+        }}
+      />
     </header>
   );
 };

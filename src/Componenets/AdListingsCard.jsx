@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { BsThreeDotsVertical } from "react-icons/bs";
 import { FiMapPin, FiClock, FiEye, FiMessageSquare, FiPhone, FiEdit, FiZap } from "react-icons/fi";
+import AlertModal from "../Modal/AlertModal";
 
 export default function AdListingsCard({
   image,
@@ -13,6 +14,9 @@ export default function AdListingsCard({
   calls
 }) {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [alertModel, setAlertModel] = useState(false);
+  const [buttonLoader, setButtonLoader] = useState(false);
+
 
   return (
     <div className="border rounded-xl p-4 shadow-sm bg-white flex items-start gap-4 relative">
@@ -82,7 +86,7 @@ export default function AdListingsCard({
 
         {menuOpen && (
           <div className="absolute right-0 top-7 bg-white border rounded-md shadow-md w-32 text-sm z-10">
-            <button className="block w-full text-left px-4 py-2 hover:bg-gray-100">
+            <button onClick={()=> setAlertModel(true)} className="block w-full text-left px-4 py-2 hover:bg-gray-100">
               Deactivate
             </button>
             <button className="block w-full text-left px-4 py-2 hover:bg-gray-100">
@@ -91,6 +95,7 @@ export default function AdListingsCard({
           </div>
         )}
       </div>
+      <AlertModal open={alertModel} handleClose={()=> setAlertModel(false)} title="Are you sure you want to deactivate this ad?" buttonLoader={buttonLoader} />
     </div>
   );
 }
