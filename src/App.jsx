@@ -30,7 +30,7 @@ export default function App() {
     <Routes>
     <Route path="/" element={<Home/>}/>
     <Route path="/category" element={<Category/>}/>
-    <Route path="/productView" element={<ProductView/>}/>
+    <Route path="/productView/:id" element={<ProductView/>}/>
     <Route path="/chat" element={<Chat/>}/>
     <Route path="/userProfile" element={<UserProfile/>}/>
     <Route path="/favorites" element={<Favorites/>}/>

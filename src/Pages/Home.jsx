@@ -1,67 +1,76 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Header from "../Componenets/Header/Header";
 import Categories from "../Componenets/Categories";
 import ProductSection from "../Componenets/ProductSection";
 import TopFooter from "../Componenets/TopFooter";
 import Footer from "../Componenets/Footer";
 import HeroSection from "../Componenets/HeroSection";
-import laptop from "../Images/laptop.png"
+import axios from "axios";
+import { ScaleLoader } from "react-spinners";
 const Home = () => {
-  // Dummy products (replace later with API or Firebase data)
-  const products = [
-    {
-      title: "Apple iMac all models 2015",
-      price: "120,800",
-      image: laptop,
-      location: "NAMED CITY, PUNE",
-        time: "2 hours ago",
-    },
-    {
-      title: "Apple iMac all models 2015",
-      price: "120,800",
-      image: laptop,
-      location: "NAMED CITY, PUNE",
-        time: "2 hours ago",
-    },
-    {
-      title: "Apple iMac all models 2015",
-      price: "120,800",
-      image: laptop,
-      location: "NAMED CITY, PUNE",
-        time: "2 hours ago",
-    },
-    {
-      title: "Apple iMac all models 2015",
-      price: "120,800",
-      image: laptop,
-      location: "NAMED CITY, PUNE",
-        time: "2 hours ago",
-    },
-  ];
+  const apiBaseUrl = import.meta.env.VITE_APP_API_URL;
+  let token = "709|waX19uvJMDmrXsPzfWr3na3rOEaBpDGakvhtmkm14f653f48";
+
+  const [products, setProducts] = useState([]);
+  const [screenLoader, setScreenLoader] = useState(false);
+
+  const handleGetListing = async () => {
+    setScreenLoader(true);
+    try {
+      const response = await axios.post(
+        `${apiBaseUrl}post/getAll`,
+        { per_page: 200, page: 1 },
+        { headers: { Authorization: `Bearer ${token}` } }
+      );
+
+      if (response?.data?.status === true) {
+        setProducts(response?.data?.data?.listings);
+      }
+    } catch (error) {
+      console.error("Error fetching listing:", error);
+    } finally {
+      setScreenLoader(false);
+    }
+  };
+
+  useEffect(() => {
+    handleGetListing();
+  }, []);
+
+  // ⭐ Get all unique categories dynamically
+  const categories = [...new Set(products.map((item) => item.categoryName))];
 
   return (
-    <div className=" min-h-screen flex flex-col">
-      {/* Header Section */}
+    <div className="min-h-screen flex flex-col">
       <Header />
+      <HeroSection />
 
-      {/* Hero Section (Optional — if you have banner images) */}
-    <HeroSection/>
- <div className="flex  flex-col w-[100%] justify-center items-center">
-     <div className="flex  flex-col w-[85%] justify-center items-center">
-      {/* Categories Section */}
-      <Categories />
+      <div className="flex flex-col w-full justify-center items-center">
+        <div className="flex flex-col w-[85%] justify-center items-center">
+          <Categories />
 
-      {/* Product Sections */}
-      <ProductSection title="Electronics" products={products} />
-      <ProductSection title="Fashion" products={products} />
-      <ProductSection title="Furniture" products={products} />
-      <ProductSection title="Personal Care" products={products} />
+        {screenLoader ? (
+            <div className="flex w-full min-h-[60vh] justify-center items-center">
+              <ScaleLoader color="#3870F8" />
+            </div>
+          ) : (
+            <>
+          {categories.map((cat, index) => (
+            <ProductSection
+              key={index}
+              title={cat}
+              products={products
+                .filter((item) => item?.categoryName === cat)
+                .slice(0, 4)}   // ⭐ LIMIT TO 4 PRODUCTS
+            
+            />
+          ))}
+          </>
+          )}
 
-      {/* Top Footer Banner */}
-      <TopFooter />
+          <TopFooter />
+        </div>
       </div>
-</div>
-      {/* Footer */}
       <Footer />
     </div>
   );
